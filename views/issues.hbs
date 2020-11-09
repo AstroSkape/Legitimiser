@@ -1,24 +1,53 @@
 <h6>Issues</h6>
 <h3>Welcome {{name}}</h3>
-{{#if issue}}
+<div class="row">
+    {{#each issue}}
+    <div class="col s12 m4">
+        <div class="card">
+            <div class="card-image">
+                {{{editIcon user ../user _id}}}
+            </div>
+            <div class="card-content center-align">
+                <h5>{{title}}</h5>
+                <p>{{stripTags (truncate body 150)}}</p>
+                <br>
+                <div class="chip">
+                    <img src="{{user.image}}" alt="">
+                    <a href="/issues/user/{{user._id}}">{{user.displayName}}</a>
+                </div>
+            </div>
+            <div class="card-action center-align">
+                <a href="/issues/{{_id}}" class="btn grey">Read More</a>
+            </div>
+        </div>
+    </div>
+    {{else}}
+    <p>No stories to display</p>
+    {{/each}}
+</div>
+{{!-- {{#if issue}}
     <table class="striped">
         <thead>
             <tr>
                 <th>Title</th>
-                <th>Data</th>
+                <th>Body</th>
+                <th>Date</th>
                 <th>Status</th>
+                <th>Read More</th>
             </tr>
         </thead>
         <tbody>
             {{#each issue}}
                 <tr>
-                    <td><a href="/issues/{{_id}}"></a>{{title}}</td>
-                    <td>{{createdAt}}</td>
+                    <td><a href="/issues/{{_id}}">{{title}}</a></td>
+                    <td><a href="/issues/{{_id}}"></a>{{stripTags (truncate body 200) }}</td>
+                    <td>{{formatDate createdAt 'MMMM Do YYYY, h:mm:ss a'}}</td>
                     <td><span class="dash-status">{{status}}</span></td>
+                    <td><a href="/stories/{{_id}}" class="btn grey"></a></td>
                 </tr>
             {{/each}}
         </tbody>
     </table>
 {{else}}
     <p>You have not created any issues</p>
-{{/if}}
+{{/if}} --}}

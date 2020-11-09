@@ -25,7 +25,11 @@ router.get('/dashboard', ensureAuth, (req, res) => {
 // @route   GET /issues
 router.get('/issues', ensureAuth, async (req, res) => {
     try {
-        const issue = await Issue.find({ user: req.user.id }).lean()
+        //const issue = await Issue.find({ user: req.user.id }).lean()
+        const issue = await Issue.find({ status: 'public' })
+         .populate('user')
+         .sort({ createdAt: 'desc' })
+         .lean()
         res.render('Issues', {
             layout: 'add_issue',
             name: req.user.lastName,
