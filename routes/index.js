@@ -2,6 +2,8 @@ const express = require('express')
 const router = express.Router()
 const { ensureAuth, ensureGuest } = require('../middleware/auth')
 
+const Issue = require('../models/Issues')
+
 // @desc    Login/Landing page
 // @route   GET /
 router.get('/', ensureGuest, (req, res) => {
@@ -17,6 +19,23 @@ router.get('/dashboard', ensureAuth, (req, res) => {
     res.render('dashboard', {
         name: req.user.firstName,
     })
+})
+
+// @desc    Issues
+// @route   GET /issues
+router.get('/issues', ensureAuth, async (req, res) => {
+    try {
+        const issue = await Issue.find({ user: req.user.id }).lean()
+        res.render('Issues', {
+            layout: 'add_issue',
+            name: req.user.lastName,
+            issue
+        })
+    } catch(err){
+        console.error(err)
+        res.render('error/500')
+    }
+    //console.log(req.user)
 })
 
 module.exports = router
