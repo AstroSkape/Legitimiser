@@ -13,12 +13,18 @@
                 <br>
                 <div class="chip">
                     <img src="{{user.image}}" alt="">
-                    <a href="/issues/user/{{user._id}}">{{user.displayName}}</a>
+                    <a>{{user.displayName}}</a>
                 </div>
             </div>
             <div class="card-action center-align">
                 <a href="/issues/{{_id}}" class="btn grey">Read More</a>
             </div>
+            <form action="/issues/{{_id}}" method="POST" id="delete-form">
+                <input type="hidden" name="_method" value="DELETE">
+                <button type="submit" class="btn-floating halfway-fab red">
+                    <i class="fas fa-trash fa-small"></i>
+                </button>
+            </form>
         </div>
     </div>
     {{else}}
