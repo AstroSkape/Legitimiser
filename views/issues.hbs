@@ -1,0 +1,69 @@
+
+<style>
+  body{
+    background-image: url('https://cdn.wallpapersafari.com/30/97/x6KWGw.jpg');
+     height: 100%;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-color: black;
+  }
+  </style>
+  <h1 class="text-center display-4 my-4" style="color:rgb(35, 180, 161); font-family:-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif; font-weight:bold">ISSUES</h1>
+<div class="row" >
+    {{#each issue}}
+    <div class="col s12 m4" >
+        <div class="card" style="background-color: rgba(69, 77, 77, 0.733);">
+            <div class="card-image">
+                <form action="/issues/{{_id}}" method="POST" id="delete-form">
+                    <input type="hidden" name="_method" value="DELETE">
+                    <button type="submit" class="waves-effect btn-floating halfway-fab red" style="position:relative; float:right">
+                        <i class="fas fa-trash fa-small"></i>
+                    </button>
+                </form>
+                {{{editIcon user ../user _id}}}
+            </div>
+            <div class=" white card-content center-align" style="font-size:20px; font-weight:bold; font-family:'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif">
+                <h5 style="font-weight:bold; font-family:'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif">{{title}}</h5>
+                <p>{{stripTags (truncate body 150)}}</p>
+                <br>
+                <div class=" grey lighten-2 chip" style="font-weight:bold; font-family:'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif">
+                    <img src="{{user.image}}" alt="">
+                    <a>{{user.displayName}}</a>
+                </div>
+            </div>
+            <div class="card-action center-align"style="font-weight:bold;font-family:'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif">
+                <a href="/issues/{{_id}}" class="btn brown ">Read More</a>
+            </div>
+        </div>
+    </div>
+    {{else}}
+    <p>No stories to display</p>
+    {{/each}}
+</div>
+{{!-- {{#if issue}}
+    <table class="striped">
+        <thead>
+            <tr>
+                <th>Title</th>
+                <th>Body</th>
+                <th>Date</th>
+                <th>Status</th>
+                <th>Read More</th>
+            </tr>
+        </thead>
+        <tbody>
+            {{#each issue}}
+                <tr>
+                    <td><a href="/issues/{{_id}}">{{title}}</a></td>
+                    <td><a href="/issues/{{_id}}"></a>{{stripTags (truncate body 200) }}</td>
+                    <td>{{formatDate createdAt 'MMMM Do YYYY, h:mm:ss a'}}</td>
+                    <td><span class="dash-status">{{status}}</span></td>
+                    <td><a href="/stories/{{_id}}" class="btn grey"></a></td>
+                </tr>
+            {{/each}}
+        </tbody>
+    </table>
+{{else}}
+    <p>You have not created any issues</p>
+{{/if}} --}}
