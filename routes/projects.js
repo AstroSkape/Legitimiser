@@ -2,7 +2,7 @@ const express = require('express')
 const mongoose = require('mongoose');
 const router = express.Router()
 const multer = require('multer');
-const GridFsStorage = require('multer-gridfs-storage');
+const {GridFsStorage} = require('multer-gridfs-storage');
 const Grid = require('gridfs-stream');
 const { ensureAuth } = require('../middleware/auth')
 
